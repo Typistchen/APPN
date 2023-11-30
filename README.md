@@ -10,6 +10,8 @@ our model in the file model.py
 ![APPN](https://github.com/oscarknagg/few-shot/blob/master/assets/matching_nets_diagram.png)
 
 
+![SETTING](https://github.com/oscarknagg/few-shot/blob/master/assets/matching_nets_diagram.png)
+
 # Getting started
 
 ## CIFAR-FS
