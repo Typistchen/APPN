@@ -7,10 +7,10 @@ This project is written in python 3.6 and Pytorch and assumes you have
 a GPU.
 
 our model in the file model.py 
-![APPN](https://github.com/oscarknagg/few-shot/blob/master/assets/matching_nets_diagram.png)
+![APPN](https://github.com/Typistchen/APPN/blob/main/model_picture/zongtu.pdf)
 
 
-![SETTING](https://github.com/oscarknagg/few-shot/blob/master/assets/matching_nets_diagram.png)
+![SETTING](https://github.com/Typistchen/APPN/blob/main/model_picture/jihe.pdf)
 
 # Getting started
 
