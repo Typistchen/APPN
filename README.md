@@ -8,10 +8,10 @@ a GPU.
 
 our model in the file model.py 
 
-![APPN](https://github.com/Typistchen/APPN/blob/main/model_picture/zongtu.pdf)
+![APPN](https://github.com/Typistchen/APPN/blob/main/model_picture/APPN.png)
 
 
-![SETTING](https://github.com/Typistchen/APPN/blob/main/model_picture/jihe.pdf)
+![SETTING](https://github.com/Typistchen/APPN/blob/main/model_picture/SETTING.png)
 
 # Getting started
 
