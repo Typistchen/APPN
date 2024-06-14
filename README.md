@@ -1,4 +1,4 @@
-# APPN: a Attention-based Pseudo-label Propagation Network for few-shot learning with noisy labels
+# APPN: an Attention-based Pseudo-label Propagation Network for few-shot learning with noisy labels
 
 The aim for this repository is to contain clean, readable and tested
 code to produce APPN.
@@ -41,7 +41,7 @@ our model in the file model.py
 
 
 # Running the scripts
-To pre-train the contrastive network in the terminal, use:
+To train the APPN network in the terminal, use:
 ```bash
 $ python experiment.sh
 ```
