@@ -18,7 +18,6 @@ import json
 import torch
 import torchvision.models as models
 import torch.nn as nn
-<<<<<<< HEAD
 # import torchsummary as summary
 import torch
 import torch.nn as nn
@@ -30,9 +29,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 import numpy as np
-=======
-
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 
 setup_dirs()
 assert torch.cuda.is_available()
@@ -65,11 +61,7 @@ parser.add_argument('--metric_method', default="cosine")
 
 
 ###############
-<<<<<<< HEAD
 parser.add_argument('--gpu',        type=str,   default=1,          metavar='GPU',
-=======
-parser.add_argument('--gpu',        type=str,   default=0,          metavar='GPU',
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
                     help="gpus, default:0")
 # model params
 n_examples = 600
@@ -90,11 +82,8 @@ parser.add_argument('--n_query',    type=int,   default=15,         metavar='NQU
                     help="nquery")
 parser.add_argument('--n_epochs',   type=int,   default=2100,       metavar='NEPOCHS',
                     help="nepochs")
-<<<<<<< HEAD
 parser.add_argument('--scale',   type=int,   default=1,       metavar='NEPOCHS',
                     help="nepochs")
-=======
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 # test hyper-parameters
 parser.add_argument('--n_test_way', type=int,   default=5,          metavar='NTESTWAY',
                     help="ntestway")
@@ -159,7 +148,6 @@ elif args.noise_type == "OOD":
     val_path = DATA_PATH + '/' + args.noise_dataset + '/'+ args.noise_dataset + '_val.json'
     with open(val_path) as f:
         val_total_class = json.load(f)
-<<<<<<< HEAD
 elif args.noise_type == "mixed":
     train_path = DATA_PATH + '/' + args.noise_dataset + '/'+ args.noise_dataset + '_train.json'
     with open(train_path) as f:
@@ -178,13 +166,6 @@ else:
     train_total_class = None
     val_total_class = None
 
-=======
-else:
-    train_total_class = None
-    val_total_class = None
-
-
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 if args.dataset not in ['tieredImagenet', 'cifar', 'fc100', 'miniImageNet']:
     raise ValueError('Unsupported dataset')
 
@@ -224,12 +205,8 @@ num_epochs = 300
 lr=1e-5
 backbone = CNNEncoder(args)
 model = model.LabelPropagation(args, backbone)
-<<<<<<< HEAD
 
 model.cuda()  
-=======
-model.cuda(0)  
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 
 
 model_optim = torch.optim.Adam(model.parameters(), lr=1e-4,weight_decay=0.02)
@@ -251,7 +228,6 @@ for ep in range(num_epochs):
 
         x, query_y, support_y, class_name = prepare_batch(batch)
         # noise_idxes = 0
-<<<<<<< HEAD
         
         # x,noise_idxes = add_noise(5, 5, x, args.noise_type, class_name, train_total_class, args.dataset, args.noise_dataset, "train")
         if args.noise_type == 'mixed': 
@@ -261,9 +237,6 @@ for ep in range(num_epochs):
             pass
         else:
             x,noise_idxes = add_noise(5, 5, x, args.noise_type, class_name, train_total_class, args.dataset, args.noise_dataset, "train",args.scale)
-=======
-        x,noise_idxes = add_noise(5, 5, x, args.noise_type, class_name, train_total_class, args.dataset, args.noise_dataset, "train")
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
         support_y = support_y.to('cpu')
         query_y = query_y.to('cpu')
         x = x.float()
@@ -274,12 +247,8 @@ for ep in range(num_epochs):
 
         model.train()
 
-<<<<<<< HEAD
         inputs = [support_a, one_hot_support.cuda(), query_a, one_hot_query.cuda(),noise_idxes]
         # parameter = model.named_parameters
-=======
-        inputs = [support_a, one_hot_support.cuda(0), query_a, one_hot_query.cuda(0),noise_idxes]
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 
         loss, acc = model(inputs)
 
@@ -297,7 +266,6 @@ for ep in range(num_epochs):
         model.eval()
         prepare_batch = prepare_nshot_task(5, 5, 15)
         x, query_y, support_y, class_name = prepare_batch(batch)
-<<<<<<< HEAD
         noise_idxes = []
         # x, = add_noise(5, 5, x, args.noise_type, class_name, val_total_class, args.dataset, args.noise_dataset,"val" )
         if args.noise_type == 'mixed': 
@@ -307,22 +275,13 @@ for ep in range(num_epochs):
             x,noise_idxes = add_noise(5, 5, x, args.noise_type, class_name, val_total_class, args.dataset, args.noise_dataset, "val",args.scale)
         
 
-=======
-        
-        x,noise_idxes = add_noise(5, 5, x, args.noise_type, class_name, val_total_class, args.dataset, args.noise_dataset,"val" )
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
         x = x.float()
         support_a = x[:25,:,:,:]
         query_a = x[25:,:,:,:]
         support_y = support_y.to('cpu')
         query_y = query_y.to('cpu')
-<<<<<<< HEAD
         one_hot_support = torch.eye(5)[support_y].cuda(1)
         one_hot_query = torch.eye(5)[query_y].cuda(1)
-=======
-        one_hot_support = torch.eye(5)[support_y].cuda()
-        one_hot_query = torch.eye(5)[query_y].cuda()
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
     
         with torch.no_grad():
             inputs = [support_a.cuda(0), one_hot_support.cuda(0), query_a.cuda(0), one_hot_query.cuda(0), noise_idxes]

@@ -170,12 +170,9 @@ class MatchingNetwork(nn.Module):
         pass
 
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
 class BidrectionalLSTM(nn.Module):
     def __init__(self, size: int, layers: int):
         """Bidirectional LSTM used to generate fully conditional embeddings (FCE) of the support set as described
