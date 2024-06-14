@@ -94,6 +94,7 @@ def proto_net_episode(model: Module,
     
     return loss2, y_pred
 
+<<<<<<< HEAD
 # def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset, noisedataset, model):
 #     transform_init = TransformLoader(84)
 #     if model == "val":
@@ -188,6 +189,9 @@ def proto_net_episode(model: Module,
 
 
 def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset, noisedataset, model, scale):
+=======
+def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset, noisedataset, model):
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
     transform_init = TransformLoader(84)
     if model == "val":
         transform = transform_init.get_composed_transform(aug=False)
@@ -196,6 +200,7 @@ def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset,
 
 
     if noise_type == 'IT':
+<<<<<<< HEAD
 
         if scale == 1:
             noise_idxes = []
@@ -226,6 +231,16 @@ def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset,
             data[noise_idxes2[-1]] = temp2
             noise_idxes = noise_idxes1 + noise_idxes2
             return data,noise_idxes
+=======
+        noise_idxes = []
+        for i in range(n_way):
+            noise_idxes.append(k_shot * i  + random.randint(0, 4))
+        temp = data[noise_idxes[0]]
+        for i in range(len(noise_idxes)-1):
+            data[noise_idxes[i]] = data[noise_idxes[i+1]]
+        data[noise_idxes[-1]] = temp
+        return data, noise_idxes
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
     
     elif noise_type == 'OOT':
         class_name = list(set(class_name)) # 去掉重复元素
@@ -237,20 +252,36 @@ def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset,
         for key_name in random_images:
             picture_name = random.sample(total_class[key_name], 1)
             for picname in picture_name:
+<<<<<<< HEAD
                 if model == "train":
                         path = DATA_PATH + '/' + dataset + '/train/' + key_name + '/' + picname
                 if model == "val":
                         path = DATA_PATH + '/' + dataset + '/val/' + key_name + '/' + picname
                 image = Image.open(path)
                 
+=======
+                path = DATA_PATH + '/' + dataset + '/train/' + key_name + '/' + picname
+                # "/home/dsz/cjq/few-shot-master/data/fc100/train/train/train_s_002445.png"
+                
+                image = Image.open(path)
+                transform = transforms.Compose([
+                        transforms.ToTensor(),
+                    ])
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
                 tensor_image = transform(image)
                 selected_images.append(tensor_image)
 
         noise_idxes = []
         for i in range(n_way):
+<<<<<<< HEAD
                 noise_idxes.append(k_shot * i  + random.randint(0, 4))
         for i in range(len(noise_idxes)):
                 data[noise_idxes[i]] = selected_images[i]
+=======
+            noise_idxes.append(k_shot * i  + random.randint(0, 4))
+        for i in range(len(noise_idxes)):
+            data[noise_idxes[i]] = selected_images[i]
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
         return data,noise_idxes
 
     elif noise_type == 'OOD':
@@ -258,7 +289,11 @@ def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset,
         random_images = random.sample(className_key, n_way) #随机选取5个键值
         selected_images = []
         for key_name in random_images:
+<<<<<<< HEAD
             picture_name = random.sample(total_class[key_name], scale)
+=======
+            picture_name = random.sample(total_class[key_name], 1)
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
             for picname in picture_name:
                 if model == "train":
                     path = DATA_PATH + '/' + noisedataset + '/train/' + key_name + '/' + picname
@@ -297,4 +332,8 @@ def add_noise(k_shot, n_way, data, noise_type, class_name, total_class, dataset,
             data[noise_idxes[i]] = selected_images[i]
         return data,noise_idxes
     elif noise_type == False:
+<<<<<<< HEAD
         return data,[]
+=======
+        return data
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c

@@ -181,6 +181,7 @@ class TransformLoader:
         transform_funcs = [self.parse_transform(x) for x in transform_list]
         transform = transforms.Compose(transform_funcs)
         return transform
+<<<<<<< HEAD
 
 
 class OmniglotDataset(Dataset):
@@ -263,3 +264,5 @@ class OmniglotDataset(Dataset):
 
         progress_bar.close()
         return images
+=======
+>>>>>>> a52eedf06cdbf6397495d8911024768249f9391c
